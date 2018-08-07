@@ -34,8 +34,9 @@ namespace AirportDistanceCalculator
             ConfigurationBinder.Bind(_config, appConfig);
 
             var airportService = new AirportService(appConfig);
+            var airportDistanceService = new AirportDistanceService(airportService);
 
-            app.UseOwin(x => x.UseNancy(opt => opt.Bootstrapper = new AirportDistanceBootstrapper(appConfig, airportService)));
+            app.UseOwin(x => x.UseNancy(opt => opt.Bootstrapper = new AirportDistanceBootstrapper(appConfig, airportService, airportDistanceService)));
         }
     }
 }

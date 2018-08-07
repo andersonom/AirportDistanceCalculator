@@ -1,18 +1,15 @@
 ﻿using AirportDistanceCalculator.Interfaces.Services;
-using AirportDistanceCalculator.Models;
-using Nancy;
+using Nancy; 
 
 namespace AirportDistanceCalculator
 {
     public class AirportDistanceModule : NancyModule
     {
-        public AirportDistanceModule(IAppConfiguration appConfig, IAirportService airportService)
+        public AirportDistanceModule(IAppConfiguration appConfig, IAirportDistanceService airportDistanceService)
         {
-            Get("/", args => "Please fill the route /AirportDistance/{iata1}/to/{iata2}");
+            Get("/", args => "Please fill the route /AirportDistance/{iataFrom}/to/{iataTo}");
 
-            Get("/AirportDistance/{iata1}/to/{iata2}", args => Response.AsJson(airportService.GetAirport((string)args.iata1)));
-
-            Get("/Airport/{name}", args => Response.AsJson(new Airport() { Name = args.name }));
+            Get("/AirportDistance/{iataFrom}/to/{iataTo}", args => Response.AsJson(airportDistanceService.GetDistanceBetweenAirports((string)args.iataFrom, (string)args.iataTo).Result));             
         }
     }
 }

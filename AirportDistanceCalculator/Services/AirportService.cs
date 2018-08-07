@@ -19,20 +19,7 @@ namespace AirportDistanceCalculator.Services
             return await _appConfig.CTeleportAPI
                 .AllowAnyHttpStatus()
                 .AppendPathSegment(IATA)
-                .GetJsonAsync<Airport>();
-
-            //var result = await _appConfig.CTeleportAPI
-            //    .AllowAnyHttpStatus()
-            //    .AppendPathSegment(IATA)
-            //    .GetAsync();
-
-            //var response = result.Content.ReadAsStringAsync().Result;
-            //if (result.IsSuccessStatusCode)
-            //{
-            //    var ret = JsonConvert.DeserializeObject<Airport>(response);
-            //    return ret;
-            //}
-            //throw new Exception(response + result.StatusCode);
+                .GetJsonAsync<Airport>(); 
         }
     }
 }
