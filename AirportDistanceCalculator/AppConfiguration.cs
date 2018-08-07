@@ -3,6 +3,7 @@
     public class AppConfiguration : IAppConfiguration
     {
         public Logging Logging { get; set; }
+        public string CTeleportAPI { get; set; }
     }
 
     public class LogLevel
@@ -16,5 +17,5 @@
     {
         public bool IncludeScopes { get; set; }
         public LogLevel LogLevel { get; set; }
-    }  
+    }     
 }
