@@ -4,9 +4,9 @@ namespace AirportDistanceCalculator.Models
 {
     public class Airport
     {
-        public int Id { get; set; }
         public string Country { get; set; }
         public string IATA { get; set; }
+        public string City { get; set; }
         [JsonProperty("city_iata")]
         public string CityIATA { get; set; }
         [JsonProperty("country_iata")]
