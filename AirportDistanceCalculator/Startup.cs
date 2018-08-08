@@ -1,4 +1,4 @@
-﻿using AirportDistanceCalculator.Interfaces.Services;
+﻿using AirportDistanceCalculator.Middleware;
 using AirportDistanceCalculator.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +35,10 @@ namespace AirportDistanceCalculator
 
             var airportService = new AirportService(appConfig);
             var airportDistanceService = new AirportDistanceService(airportService);
+
+            //TODO Add MVC to inject IHttpResponseStreamWriterFactory inside UseExceptionMiddleware ?
+
+            app.UseExceptionMiddleware();
 
             app.UseOwin(x => x.UseNancy(opt => opt.Bootstrapper = new AirportDistanceBootstrapper(appConfig, airportService, airportDistanceService)));
         }

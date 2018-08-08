@@ -9,7 +9,12 @@ namespace AirportDistanceCalculator
         {
             Get("/", args => "Please fill the route /AirportDistance/{iataFrom}/to/{iataTo}");
 
-            Get("/AirportDistance/{iataFrom}/to/{iataTo}", args => Response.AsJson(airportDistanceService.GetDistanceBetweenAirports((string)args.iataFrom, (string)args.iataTo).Result));             
+            Get("/AirportDistance/{iataFrom}/to/{iataTo}", args => 
+            
+            Response.AsJson(airportDistanceService
+
+            .GetDistanceBetweenAirports(((string)args.iataFrom).Trim().ToUpper(),
+                                        ((string)args.iataTo).Trim().ToUpper()).Result));             
         }
     }
 }

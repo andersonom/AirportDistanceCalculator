@@ -16,6 +16,7 @@ namespace AirportDistanceCalculator.Services
 
         public async Task<Airport> GetAirport(string IATA)
         {
+            //TODO: Validation
             return await _appConfig.CTeleportAPI
                 .AllowAnyHttpStatus()
                 .AppendPathSegment(IATA)
