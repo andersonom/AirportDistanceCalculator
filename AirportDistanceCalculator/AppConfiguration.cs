@@ -1,4 +1,6 @@
-﻿namespace AirportDistanceCalculator
+﻿using AirportDistanceCalculator.Interfaces;
+
+namespace AirportDistanceCalculator
 {
     public class AppConfiguration : IAppConfiguration
     {

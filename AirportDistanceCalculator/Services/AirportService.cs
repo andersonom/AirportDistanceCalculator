@@ -1,8 +1,10 @@
-﻿using AirportDistanceCalculator.Interfaces.Services;
+﻿using System.Net.Http;
+using AirportDistanceCalculator.Interfaces.Services;
 using AirportDistanceCalculator.Models;
 using System.Threading.Tasks;
 using AirportDistanceCalculator.Exceptions;
 using AirportDistanceCalculator.Helpers;
+using AirportDistanceCalculator.Interfaces;
 using AirportDistanceCalculator.Validators;
 using FluentValidation;
 using Flurl.Http;
@@ -27,21 +29,19 @@ namespace AirportDistanceCalculator.Services
         {
             ValidationResultHelper.ProcessIETAValidationResult(_iataValidator.Validate(iata));
 
-            var result = await _appConfig.CTeleportAPI
+            HttpResponseMessage result = await _appConfig.CTeleportAPI
                 .AllowAnyHttpStatus()
                 .AppendPathSegment(iata)
                 .GetAsync();
 
-            var response = result.Content.ReadAsStringAsync().Result;
+            string response = result.Content.ReadAsStringAsync().Result;
 
-            if (result.IsSuccessStatusCode)
-            {
-                var airport = JsonConvert.DeserializeObject<Airport>(response);
-                ValidationResultHelper.ProcessAirportValidationResult(_validator.Validate(airport));
-                return airport;
-            }
+            if (!result.IsSuccessStatusCode)
+                throw new IETAValidationException(response, (Nancy.HttpStatusCode)result.StatusCode);
 
-            throw new IETAValidationException(response, (Nancy.HttpStatusCode)result.StatusCode);
+            Airport airport = JsonConvert.DeserializeObject<Airport>(response);
+            ValidationResultHelper.ProcessAirportValidationResult(_validator.Validate(airport));
+            return airport;
         }
     }
 }

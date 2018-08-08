@@ -1,11 +1,12 @@
 ﻿using AirportDistanceCalculator.Exceptions;
 using AirportDistanceCalculator.Interfaces.Services;
 using AirportDistanceCalculator.Helpers;
+using AirportDistanceCalculator.Interfaces;
 using Nancy;
 
 namespace AirportDistanceCalculator
 {
-    public class AirportDistanceModule : NancyModule
+    public sealed class AirportDistanceModule : NancyModule
     {
         public AirportDistanceModule(IAppConfiguration appConfig, IAirportDistanceService airportDistanceService)
         {
@@ -22,8 +23,8 @@ namespace AirportDistanceCalculator
             {
                 switch (ex)
                 {
-                    case IETAValidationException iETAValidationEx:
-                        return NancyResponseHelper.ProcessNancyResponse(iETAValidationEx);
+                    case IETAValidationException iEtaValidationEx:
+                        return NancyResponseHelper.ProcessNancyResponse(iEtaValidationEx);
                     case AirportValidationException airportValidationEx:
                         return NancyResponseHelper.ProcessNancyResponse(airportValidationEx);
                     default:

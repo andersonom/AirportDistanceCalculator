@@ -1,4 +1,5 @@
-﻿using AirportDistanceCalculator.Interfaces.Services;
+﻿using AirportDistanceCalculator.Interfaces;
+using AirportDistanceCalculator.Interfaces.Services;
 using Nancy;
 using Nancy.TinyIoc;
 
