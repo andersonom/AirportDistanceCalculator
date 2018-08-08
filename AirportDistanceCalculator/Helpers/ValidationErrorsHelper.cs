@@ -6,7 +6,7 @@ namespace AirportDistanceCalculator.Helpers
     {
         public static string AggregateErrorMessages(FluentValidation.Results.ValidationResult result)
         {
-            return result.Errors.Aggregate("",
+            return result.Errors.Aggregate("Errors: ",
                                 (current, failure) => current + failure.ErrorMessage + System.Environment.NewLine);
         }
     }

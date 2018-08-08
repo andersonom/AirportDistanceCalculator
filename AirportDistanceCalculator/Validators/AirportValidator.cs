@@ -1,9 +1,5 @@
 ﻿using AirportDistanceCalculator.Models;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AirportDistanceCalculator.Validators
 {
@@ -11,9 +7,9 @@ namespace AirportDistanceCalculator.Validators
     {
         public AirportValidator()
         { 
-            this.RuleFor(x => x.IATA).NotEmpty().Length(3);
-            this.RuleFor(x => x.Location.Lat).NotEmpty().GreaterThan(0);
-            this.RuleFor(x => x.Location.Lon).NotEmpty().GreaterThan(0); 
+            RuleFor(x => x.IATA).NotEmpty().Length(3);
+            RuleFor(x => x.Location.Lat).NotEmpty().GreaterThan(-90).LessThan(90);
+            RuleFor(x => x.Location.Lon).NotEmpty().GreaterThan(-180).LessThan(180); 
         }
     }
 }

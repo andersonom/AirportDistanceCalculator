@@ -1,6 +1,6 @@
-﻿using System; 
+﻿using System;
 
-namespace AirportDistanceCalculator.Services
+namespace AirportDistanceCalculator.Helpers
 {
     public static class DistanceHelper 
     {

@@ -1,5 +1,7 @@
-﻿using AirportDistanceCalculator.Interfaces.Services;
-using Nancy; 
+﻿using AirportDistanceCalculator.Exceptions;
+using AirportDistanceCalculator.Interfaces.Services;
+using AirportDistanceCalculator.Helpers;
+using Nancy;
 
 namespace AirportDistanceCalculator
 {
@@ -7,14 +9,27 @@ namespace AirportDistanceCalculator
     {
         public AirportDistanceModule(IAppConfiguration appConfig, IAirportDistanceService airportDistanceService)
         {
-            Get("/", args => "Please fill the route /AirportDistance/{iataFrom}/to/{iataTo}");
+            Get("/", args => "Please fill the route /AirportDistance/{iataFrom}/{iataTo}");
 
-            Get("/AirportDistance/{iataFrom}/to/{iataTo}", args => 
-            
+            Get("/AirportDistance/{iataFrom}/{iataTo}", args =>
+
             Response.AsJson(airportDistanceService
 
-            .GetDistanceBetweenAirports(((string)args.iataFrom).Trim().ToUpper(),
-                                        ((string)args.iataTo).Trim().ToUpper()).Result));             
+            .GetDistanceBetweenAirportsAsync(((string)args.iataFrom).Trim().ToUpper(),
+                                        ((string)args.iataTo).Trim().ToUpper()).Result));
+            
+            OnError += (ctx, ex) =>
+            {
+                switch (ex)
+                {
+                    case IETAValidationException iETAValidationEx:
+                        return NancyResponseHelper.ProcessNancyResponse(iETAValidationEx);
+                    case AirportValidationException airportValidationEx:
+                        return NancyResponseHelper.ProcessNancyResponse(airportValidationEx);
+                    default:
+                        return 500;
+                }
+            };
         }
     }
 }

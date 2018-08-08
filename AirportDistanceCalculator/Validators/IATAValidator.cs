@@ -1,16 +1,12 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AirportDistanceCalculator.Validators
 {
-    public class IATAValidator : AbstractValidator<string>
+    public class IataValidator : AbstractValidator<string>
     {
-        public IATAValidator()
+        public IataValidator()
         {
-            this.RuleFor(x => x).NotEmpty().Length(3);
+            RuleFor(x => x).NotEmpty().Length(3);
         }
     }
 }

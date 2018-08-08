@@ -1,10 +1,11 @@
 ﻿using System;
+using Nancy;
 
 namespace AirportDistanceCalculator.Exceptions
 {
-    public class AirportValidationException : ApplicationException
+    public class AirportValidationException : CustomExceptionBase
     {
-        public AirportValidationException(string message) : base(message)
+        public AirportValidationException(string message, HttpStatusCode responseCode) : base(message, responseCode)
         {
 
         }

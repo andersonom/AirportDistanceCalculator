@@ -5,6 +5,6 @@ namespace AirportDistanceCalculator.Interfaces.Services
 {
     public interface IAirportService
     {
-        Task<Airport> GetAirport(string IATA);
+        Task<Airport> GetAirportAsync(string IATA);
     }
 }
