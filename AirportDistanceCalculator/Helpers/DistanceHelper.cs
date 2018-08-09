@@ -4,7 +4,7 @@ namespace AirportDistanceCalculator.Helpers
 {
     public static class DistanceHelper 
     {
-        public static double DistanceTo(double lat1, double lon1, double lat2, double lon2)
+        public static double GetDistanceInMiles(double lat1, double lon1, double lat2, double lon2)
         {
             double rlat1 = Math.PI * lat1 / 180;
             double rlat2 = Math.PI * lat2 / 180;

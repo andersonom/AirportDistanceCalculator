@@ -12,13 +12,11 @@ namespace AirportDistanceCalculator
         {
             Get("/", args => "Please fill the route /AirportDistance/{iataFrom}/{iataTo}");
 
-            Get("/AirportDistance/{iataFrom}/{iataTo}", args =>
+            Get("/AirportDistance/{iataFrom}/{iataTo}", async args => 
+                Response.AsJson(await airportDistanceService
+                                            .GetDistanceBetweenAirportsAsync(((string)args.iataFrom).Trim().ToUpper(),
+                                                                             ((string)args.iataTo).Trim().ToUpper())));
 
-            Response.AsJson(airportDistanceService
-
-            .GetDistanceBetweenAirportsAsync(((string)args.iataFrom).Trim().ToUpper(),
-                                        ((string)args.iataTo).Trim().ToUpper()).Result));
-            
             OnError += (ctx, ex) =>
             {
                 switch (ex)

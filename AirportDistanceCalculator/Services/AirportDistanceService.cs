@@ -19,7 +19,7 @@ namespace AirportDistanceCalculator.Services
             Airport airportFrom = await _airportService.GetAirportAsync(iataFrom);
             Airport airportTo = await _airportService.GetAirportAsync(iataTo);
  
-            return DistanceHelper.DistanceTo(airportFrom.Location.Lat, airportFrom.Location.Lon, airportTo.Location.Lat, airportTo.Location.Lon);
+            return DistanceHelper.GetDistanceInMiles(airportFrom.Location.Lat, airportFrom.Location.Lon, airportTo.Location.Lat, airportTo.Location.Lon);
         }         
     }
 }

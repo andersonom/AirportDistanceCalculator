@@ -2,7 +2,7 @@
 using FluentValidation.Results;
 using Xunit;
 
-namespace IataDistanceCalculator.Tests.Unit
+namespace AirportDistanceCalculator.Tests.Unit
 {
     public class IataShould
     {
@@ -38,5 +38,4 @@ namespace IataDistanceCalculator.Tests.Unit
             Assert.False(results.IsValid);
         }
     }
-
 }
